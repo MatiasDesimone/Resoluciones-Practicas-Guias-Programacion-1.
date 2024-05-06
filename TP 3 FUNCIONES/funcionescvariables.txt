@@ -1,0 +1,316 @@
+//1. Desarrollar una función que devuelva un valor RANDOM en el rango de 0 a 100
+
+prototipado int numero0a100 (int random);
+
+
+ /*   int numeroRandom = 0;
+
+    numeroRandom= numero0a100( numeroRandom);
+
+    printf("El numero random es : %d.\n\n", numeroRandom);
+
+    return 0;
+}
+
+
+int numero0a100 (int random)
+{
+    srand (time(NULL));
+
+    random = rand()%100;
+
+    return random; */ 
+
+
+---------------------------------------------------------------------------------------
+
+void mayorymenor ();
+
+
+int main()
+{
+
+ //2.  Diseñe una función que reciba 3 números enteros y muestre el mayor y el menor.
+
+    mayorymenor();
+
+
+}
+
+
+void mayorymenor ()
+{
+    int num1, num2, num3;
+
+    printf("Ingrese un numero:\n\n");
+    scanf("%d", &num1);
+
+    printf("Ingrese un numero:\n\n");
+    scanf("%d", &num2);
+
+    printf("Ingrese un numero:\n\n");
+    scanf("%d", &num3);
+
+    if(num1>num2 && num1>num3){
+        printf("El numero %d, es el mayor\n\n", num1);
+    }else if(num2>num1 && num2>num3){
+        printf("El numero %d, es el mayor\n\n", num2);
+    }else{
+        printf("El numero %d, es el mayor\n\n", num3);
+    }
+
+    if(num1<num2 && num1<num3){
+        printf("El numero %d, es el menor\n\n", num1);
+    }else if(num2<num1 && num2<num3){
+        printf("El numero %d, es el menor\n\n", num2);
+    }else{
+        printf("El numero %d, es el menor\n\n", num3);
+    }
+
+---------------------------------------------------------------------------------
+
+//3. Diseñe una función que reciba un número entero N y realice la suma de los números enteros positivos menores que N y lo retorne.
+//N es un  dato ingresado por el usuario en el main.
+int sumaN(int num);
+
+int main()
+{
+    int n = 0;
+    int totalsuma=0;
+    printf("Ingresa un numero: \n\n");
+    scanf("%d", &n);
+    totalsuma=sumaN(n);
+
+
+}
+
+int sumaN( int num)
+{
+
+    int suma = 0;
+
+    if(num>0)
+    {
+        for (int i=0; i<=num; i++)
+        {
+            suma += i;
+        }
+        printf("El total de la suma es %d\n\n", suma);
+    }
+    else
+    {
+        printf("El valor ingresado no posee numeros enteros positivos menores.\n\n");
+    }
+    return suma;
+}
+---------------------------------------------------------------------------------------------------
+
+//4. Desarrollar una función que muestre la tabla de multiplicar de un número entero recibido por parámetro.
+void tablamult (int numero);
+
+int main()
+{
+    int numerito = 0;
+    printf("Ingrese un numero para recibir su tabla de multiplicar:\n\n");
+    scanf("%d", &numerito);
+    printf("\n");
+    tablamult(numerito);
+
+
+}
+
+void tablamult (int numero)
+{
+    int resultado = 0;
+    int acumulador = 0;
+
+    for(int i = 0; i<10; i++){
+        acumulador++;
+        resultado = numero * acumulador;
+        printf("El resultado de %d por %d es %d.\n", numero, acumulador, resultado);
+    }
+}
+
+--------------------------------------------------------------------
+//5. Realice una pequeña calculadora, utilizando funciones (una función de suma, una de
+//    multiplicación, una de resta, una de división…)
+
+#include <stdio.h>
+#include <stdlib.h>
+
+void menu();
+void suma();
+void resta();
+void multiplicacion();
+void division();
+void pedirvalores(int *a, int *b);
+
+int main()
+{
+    int opcion;
+
+    while(1){
+    menu();
+    printf("Ingrese su opcion: ");
+    scanf("%d",&opcion);
+
+    switch(opcion){
+    case 1:
+        suma();
+        break;
+    case 2:
+        resta();
+        break;
+    case 3:
+        multiplicacion();
+        break;
+    case 4:
+        division();
+        break;
+    case 5:
+        printf("Saliendo del programa...\n");
+        return 0;
+    default:
+        printf("Opcion no valida. Por favor, ingrese una opcion valida");
+        break;
+    }
+}
+    return 0;
+}
+void pedirvalores(int *a, int *b){
+    printf("Introduzca el primer valor: ");
+    scanf("%d",a);
+    printf("Introduzca el segundo valor: ");
+    scanf("%d",b);
+}
+void menu(){
+    printf("\n-----------MENU----------\n");
+    printf("1.Suma\n");
+    printf("2.Resta\n");
+    printf("3.Multiplicacion\n");
+    printf("4.Division\n");
+    printf("5.Salir\n");
+}
+void suma(){
+    int a = 0;
+    int b = 0;
+    system("cls");
+    printf("\n-----------SUMA-----------\n");
+    pedirvalores(&a,&b);
+
+    printf("El resultado de la suma es: %d\n",a+b);
+    system("pause");
+    system("cls");
+}
+void resta(){
+    int a = 0;
+    int b = 0;
+    system("cls");
+    printf("\n-----------RESTA-----------\n");
+    pedirvalores(&a,&b);
+
+    printf("El resultado de la resta es: %d\n",a-b);
+    system("pause");
+    system("cls");
+}
+void multiplicacion(){
+    int a = 0;
+    int b = 0;
+    system("cls");
+    printf("\n-----------MULTIPLICACION-----------\n");
+    pedirvalores(&a,&b);
+
+    printf("El resultado de la multiplicacion es: %d\n",a*b);
+    system("pause");
+    system("cls");
+}
+void division(){
+    int a = 0;
+    int b = 0;
+    system("cls");
+    printf("\n-----------DIVISION-----------\n");
+    pedirvalores(&a,&b);
+
+    if (b != 0) {
+        printf("El resultado de la division es: %.2f\n", (float)a / b);
+        system("pause");
+    } else {
+        printf("No se puede dividir entre cero.\n");
+    }
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ACLARACION: Cuando una función en C recibe un valor por "parámetro y referencia", significa que recibe la dirección de memoria de una variable en lugar de recibir directamente el valor de esa variable. Esto permite que la función pueda modificar el valor de la variable original en lugar de solo trabajar con una copia de ese valor.
+
+En C, los parámetros se pasan por valor de forma predeterminada, lo que significa que cuando pasas una variable a una función, se crea una copia local de esa variable dentro de la función y cualquier modificación realizada en esa copia no afecta a la variable original fuera de la función.
+
+Sin embargo, cuando pasas una dirección de memoria (o referencia) de una variable como parámetro a una función, la función puede acceder directamente a la variable original y modificar su contenido. Esto se logra mediante el uso de punteros en C.
+
+Por lo tanto, cuando una función recibe un valor por "parámetro y referencia", se le pasa un puntero que apunta a la dirección de memoria de la variable original. De esta manera, cualquier cambio realizado en el valor apuntado por ese puntero afectará directamente a la variable original fuera de la función.
+
+En resumen, cuando una función recibe un valor por "parámetro y referencia" en C, puede modificar el valor de la variable original al trabajar con su dirección de memoria en lugar de una copia de su valor.
+
+
+//6. Realizar una función que reciba un número positivo entero por parámetro por referencia, y
+//     cambie su signo a negativo.
+
+void invertirSigno(int *numero);
+
+int main()
+{
+    int numerito = 0;
+    char control = 0;
+
+    printf("Ingrese un numero positivo y entero: \n\n");
+    fflush(stdin);
+    scanf("%d", &numerito);
+    printf("\n");
+    system("pause");
+
+    printf("\n");
+    printf("Se procedera a realizar la inversion del signo:\n\n");
+
+    invertirSigno(&numerito);
+
+    printf("El numero ya invertido es: %d\n", numerito);
+
+
+    return 0;
+}
+
+
+void invertirSigno(int *numero)
+{
+    *numero= -(*numero);
+}
+
+--------------------------------------------------------------------------------------------------------------------
+
+//7. Realizar una función que reciba dos números enteros por parámetro por referencia y cargue
+//   sus valores el usuario dentro de la función.
+
+void cargarvalores(int *a, int *b);
+
+
+int main()
+{
+
+    int num1 = 0, num2 = 0;
+
+    cargarvalores(&num1, &num2);
+
+    printf("Los valores cargados son %d y %d.\n", num1, num2);
+
+    return 0;
+}
+
+
+void cargarvalores(int *a, int *b)
+{
+    printf("Cargue el primer valor:\n");
+    scanf ("%d", a);
+    printf("Cargue el segundo valor:\n");
+    scanf ("%d", b);
+}
+
+-------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,632 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <time.h>
+#include "pila.h"
+#include <string.h>
+
+
+const int DIM = 10;
+const int DIM2 = 100;
+const int DIMchar = 20;
+
+void funcionMENU();
+int cargaRandomArregloVacio(int a[], int dim, int cantidadElementos); //carga elementos de manera random.
+int cargaArreglo(int a[],int v, int dim); //punto 1
+void mostrarArreglo(int a[], int v); //punto 2
+int sumaDeElementos(int a[],int v); //punto 3
+void arregloAPila(int a[],int v,Pila *p); //punto 4
+int pilaAArreglo(Pila *p, int a[], int v, int dim); //punto 4 invertido
+int cargaRandomArregloVacioFloat(float a[], int dim, int cantidadElementos);//punto 5
+int sumaDeElementosflotantes(float a[],int v);//punto 5
+void mostrarArregloFloat(float a[], int v);//punto 5
+void mostrarArregloChar(char a[], int v); // punto 6
+int buscoChar(char a[], int v, char dato);// punto 6
+int siono(int flag);
+int cargaArregloChar (char a[],int v, int dim); //cargar arreglo char punto 6
+char buscarChar();
+int buscarInt();
+float buscarFloat();
+int buscoPosicionChar(char a[], int v, char dato);
+void ordenacionxseleccionCHAR(char a[], int v);
+int buscoPosMenorChar (char a[], int v, int inicio);
+int insertarDatoOrdenadoChar(char a[], int v, char dato);
+void ordenacionxinsercionchar(int a[], int v);
+int flagArregloIntCapicua (int a[], int v);
+void intercambio(int *a, int *b);
+void invertirArregloInt(int a[], int v);
+int buscoPosMenorINT (int a[], int v, int pos);
+void ordenacionxseleccionINT(int a[], int v);
+int insertarDatoOrdenadoInt(int a[], int v, int dato);
+void ordenacionxinsercionInt(int a[], int v);
+
+
+
+
+
+int main()
+{
+    srand(time(NULL));
+
+    int punto;
+
+    int flag = 0;
+
+    int arregloInt[DIM];
+    int validosInt = 0;
+
+    float arregloFloat[DIM2];
+    float validosFloat = 0;
+    int cantidadElementos = 100;
+
+    char arregloChar[DIMchar];
+    int validosChar = 0;
+
+    Pila pilita;
+    inicpila(&pilita);
+
+    char buscando;
+
+    int posicionElemento;
+
+    int opcion;
+
+    while(1)
+    {
+        funcionMENU();
+        scanf("%d",&opcion);
+
+        switch (opcion)
+        {
+        case 1:
+//Hacer una función que reciba como parámetro un arreglo de números enteros y permita que el usuario ingrese valores al mismo por teclado.
+//La función debe retornar la cantidad de elementos cargados en el arreglo (o pueden utilizar como puntero válidos).
+            validosInt = cargaArreglo(arregloInt, validosInt, DIM);
+            printf(" %d elementos cargados.", validosInt);
+
+            break;
+
+        case 2:
+//Hacer una función que reciba como parámetro un arreglo y la cantidad de elementos (válidos) cargados en él y los muestre por pantalla.
+            validosInt = cargaArreglo(arregloInt, validosInt, DIM);
+            mostrarArreglo(arregloInt, validosInt);
+            printf("\nCantidad de elementos cargados : %d.\n", validosInt);
+
+            break;
+
+        case 3:
+//Hacer una función que reciba como parámetro un arreglo y la cantidad de elementos (válidos) cargados en él y calcule la suma de sus elementos.
+            validosInt = cargaArreglo(arregloInt, validosInt, DIM);
+            mostrarArreglo(arregloInt, validosInt);
+            int totalSumaInt = sumaDeElementos(arregloInt, validosInt);
+
+            break;
+
+        case 4:
+// Hacer una función que reciba como parámetro un arreglo, la cantidad de elementos (válidos) cargados en él y una Pila.
+//La función debe copiar los elementos del arreglo en la pila.
+            validosInt = cargaArreglo(arregloInt, validosInt, DIM);
+            mostrarArreglo(arregloInt, validosInt);
+            arregloAPila(arregloInt, validosInt, &pilita);
+            mostrar(&pilita);
+
+            break;
+
+        case 5:
+//Realizar una función que sume los elementos de un arreglo de números reales (float) de dimensión 100.
+//(se recomienda hacer una función para cargar y otra para mostrar para este tipo de dato asociado al arreglo)
+            validosFloat = cargaRandomArregloVacioFloat(arregloFloat, DIM2, cantidadElementos);
+            mostrarArregloFloat(arregloFloat, validosFloat);
+            float totalSumaFloat = sumaDeElementosflotantes(arregloFloat, validosFloat);
+
+            break;
+
+        case 6:
+//Realizar una función que indique si un elemento dado se encuentra en un arreglo de caracteres.
+            validosChar = cargaArregloChar(arregloChar,validosChar, DIMchar); //cargo el arreglo.
+            mostrarArregloChar(arregloChar, validosChar); // lo muestro.
+            printf("El arreglo tiene %d elementos.\n", validosChar); //muestro cuantos elementos tiene el arreglo.
+            buscando = buscarChar(); //cargo el elemento a buscar
+            flag = buscoChar(arregloChar, validosChar, buscando); //la funcion compara y devuelve el flag correspondiente.
+            siono(flag); //funcion que dicta sentencia segun el flag obtenido.
+
+            break;
+
+        case 7:
+
+//Realizar una función que inserte un carácter en un arreglo ordenado alfabéticamente, conservando el orden.
+            validosChar = cargaArregloChar(arregloChar, validosChar, DIMchar);
+            mostrarArregloChar(arregloChar, validosChar);
+            char insertar;
+            printf("Ingrese el caracter a insertar:\n");
+            fflush(stdin);
+            scanf("%c", &insertar);
+            printf("Caracter ingresado: %c.\n", insertar);
+            validosChar = insertarDatoOrdenadoChar(arregloChar, validosChar, insertar);
+            mostrarArregloChar(arregloChar, validosChar);
+
+            break;
+
+        case 8:
+
+//Realizar una función que obtenga el máximo carácter de un arreglo dado.
+
+
+            break:
+
+        case 9:
+
+//Realizar una función que determine si un arreglo es capicúa.
+            validosInt = cargaArreglo(arregloInt, validosInt, DIM);
+            mostrarArreglo(arregloInt, validosInt);
+            printf("Es CAPICUA¿¿??\n");
+            system("pause");
+            flag = flagArregloIntCapicua(arregloInt, validosInt);
+            siono(flag);
+
+            break;
+
+        case 10:
+
+//Realizar una función que invierta los elementos de un arreglo.  (sin utilizar un arreglo auxiliar)
+            validosInt = cargaArreglo(arregloInt, validosInt, DIM);
+            mostrarArreglo(arregloInt, validosInt);
+            printf("Do a flip!\n");
+            invertirArregloInt(arregloInt, validosInt);
+            mostrarArreglo(arregloInt, validosInt);
+
+            break;
+
+        case 11:
+
+// Ordenar un arreglo según los siguientes métodos: Selección // Inserción.
+           validosInt = cargaArreglo(arregloInt, validosInt, DIM);
+           mostrarArreglo(arregloInt, validosInt);
+//           printf("\nSeleccion\n");
+//           printf("\nInsercion\n");
+//           ordenacionxseleccionINT(arregloInt, validosInt);
+//           ordenacionxinsercionInt(arregloInt, validosInt);
+//           mostrarArreglo(arregloInt, validosInt);
+
+            break;
+
+        case 12:
+            
+// Dados dos arreglos ordenados alfabéticamente, crear un tercer arreglo con los elementos de los dos primeros intercalados, 
+//de manera que quede un arreglo también ordenado alfabéticamente.
+           
+           
+           
+           
+           
+           break;
+
+       // case 13:
+
+
+          //  break;
+
+        case 14:
+
+            printf("\nSaliendo del programa...\n");
+            return 0;
+
+        default:
+
+            printf("\nERROR\n\nEl numero ingresado no corresponde a ninguna de las opciones disponibles.\n");
+            printf("Por favor ingrese una opcion valida.\n");
+
+            break;
+
+        }
+
+    }
+
+    return 0;
+}
+
+void funcionMENU()
+{
+    printf("\nBienvenido al TP N3 'Arreglos'.\n");
+    printf("Ingrese el punto a realizar:\n");
+    printf("Puntos 1 al 13.\n");
+    printf("Opcion 14 para salir del sistema.\n");
+}
+
+int cargaArreglo(int a[],int v, int dim)
+{
+
+    char option;
+
+    while(v<dim && option != 27)
+    {
+        printf("Ingrese un dato\n");
+        scanf("%d", &a[v]);
+        v++;
+
+        printf("Quiere seguir cargando datos? Presione ESC para salir\n");
+        option = getch();
+        system("cls");
+    }
+
+    return v;
+}
+
+int cargaArregloChar (char a[],int v, int dim)
+{
+
+    char option;
+
+    while(v<dim && option != 27)
+    {
+        printf("Ingrese un dato\n");
+        fflush(stdin);
+        scanf("%c", &a[v]);
+        v++;
+
+        printf("Quiere seguir cargando datos? Presione ESC para salir\n");
+        option = getch();
+        system("cls");
+    }
+
+    return v;
+}
+
+int cargaRandomArregloVacio(int a[], int dim, int cantidadElementos)
+{
+    int validos = 0;
+    int i = 0;
+
+    if(cantidadElementos<dim)
+    {
+        for(i = 0; i< cantidadElementos; i++ )
+        {
+            a[i] = rand()%10;
+        }
+        validos = i;
+    }
+
+    return validos;
+}
+
+void mostrarArreglo(int a[], int v)
+{
+    for(int i = 0; i<v; i++)
+    {
+        if(i % 10 == 0)
+        {
+            printf("\n");
+        }
+        printf("%d |", a[i]);
+    }
+    printf("\n\n");
+}
+
+int sumaDeElementos(int a[],int v)
+{
+    int i;
+    int sumatoria = 0;
+
+    for(i = 0; i<v; i++)
+    {
+        sumatoria += a[i];
+    }
+
+    return sumatoria;
+}
+
+void arregloAPila(int a[],int v,Pila *p)
+{
+    int i;
+
+    for(i = 0; i<v; i++)
+    {
+        apilar(p, a[i]);
+    }
+}
+
+int pilaAArreglo(Pila *p, int a[], int v, int dim)
+{
+    while(!pilavacia(p)&& v < dim)
+    {
+        a[v] = desapilar(p);
+        v++;
+    }
+
+    return v;
+}
+
+int cargaRandomArregloVacioFloat(float a[], int dim, int cantidadElementos)
+{
+    int validos = 0;
+    int i = 0;
+
+    if(cantidadElementos<=dim)
+    {
+        for(i = 0; i <= cantidadElementos; i++ )
+        {
+            a[i] = rand()%100*1.1;
+        }
+        validos = i;
+    }
+
+    return validos;
+}
+
+int sumaDeElementosflotantes(float a[],int v)
+{
+    int i;
+    int sumatoriaFloat = 0;
+
+    for(i = 0; i<v; i++)
+    {
+        sumatoriaFloat += a[i];
+    }
+
+    return sumatoriaFloat;
+}
+
+void mostrarArregloFloat(float a[], int v)
+{
+    for(int i = 0; i<v; i++)
+    {
+        if(i % 10 == 0)
+        {
+            printf("\n");
+        }
+        printf("%.2f |", a[i]);
+    }
+    printf("\n\n");
+}
+
+void mostrarArregloChar(char a[], int v)
+{
+    for(int i = 0; i<v; i++)
+    {
+        if(i % 10 == 0)
+        {
+            printf("\n");
+        }
+        printf("%c |", a[i]);
+    }
+    printf("\n\n");
+
+}
+
+int buscoChar(char a[], int v, char dato)
+{
+    int flag = 0;
+
+    for(int i=0; i<v; i++)
+    {
+        if(a[i] == dato)
+        {
+            flag = 1;
+        }
+    }
+
+    return flag;
+}
+
+int siono(int flag)
+{
+    if(flag == 0)
+    {
+        printf("FALSO.\n");
+    }
+    else
+    {
+        printf("VERDADERO.\n");
+    }
+
+    flag = 0;
+
+    return flag;
+}
+
+int buscoPosicionChar(char a[], int v, char dato)
+{
+    int flag = 0;
+    int posicion = -1;
+
+    for(int i=0; i<v; i++)
+    {
+        if(a[i] == dato)
+        {
+            flag = 1;
+            posicion = i;
+        }
+    }
+
+    return posicion;
+}
+
+char buscarChar()
+{
+    char buscado;
+
+    printf("Que caracter desea buscar dentro de la cadena de caracteres?\n");
+    fflush(stdin);
+    scanf("%c", &buscado);
+
+    return buscado;
+}
+
+int buscarInt()
+{
+    int buscado = 0;
+
+    printf("Que caracter desea buscar dentro de la cadena de caracteres?\n");
+    fflush(stdin);
+    scanf("%d", &buscado);
+
+    return buscado;
+}
+
+float buscarFloat()
+{
+    float buscado = 0;
+
+    printf("Que caracter desea buscar dentro de la cadena de caracteres?\n");
+    fflush(stdin);
+    scanf("%f", &buscado);
+
+    return buscado;
+}
+
+void ordenacionxseleccionCHAR(char a[], int v)
+{
+    int posMenor;
+    int aux;
+
+    for(int i = 0; i<v; i++)
+    {
+        posMenor = buscoPosMenorChar(a, v, i);
+        aux = a[posMenor];
+        a[posMenor]= a[i];
+        a[i] = aux;
+    }
+}
+
+int buscoPosMenorChar (char a[], int v, int inicio)
+{
+    int i = inicio;
+    int posMenor;
+
+    if (i<v)
+    {
+        int posMenor = a[i];
+    }
+
+    for (i+1; i<v; i++)
+    {
+        if (a[i]<a[posMenor])
+        {
+            posMenor = i;
+        }
+    }
+
+    return posMenor;
+}
+
+int insertarDatoOrdenadoChar(char a[], int v, char dato)
+{
+    int indice = v-1;
+
+    while(indice >= 0 && a[indice] > dato)
+    {
+        a[indice+1] = a[indice];
+        indice--;
+    }
+    a[indice+1] = dato;
+
+    return v+1;
+}
+
+void ordenacionxinsercionchar(int a[], int v)
+{
+    for(int i=0; i<v; i++)
+    {
+        insertarDatoOrdenadoChar(a, i, a[i]);
+    }
+}
+
+int flagArregloIntCapicua (int a[], int v)
+{
+    int flag = 1;
+    int inicio = 0;
+    int ultimo = v-1;
+
+    while(inicio<=ultimo && flag == 1)
+    {
+        if (a[inicio] == a[ultimo])
+        {
+            inicio++;
+            ultimo--;
+        }
+        else
+        {
+            flag = 0;
+        }
+    }
+
+    return flag;
+}
+
+void intercambio(int *a, int *b)
+{
+    int aux = *b;
+    *b = *a;
+    *a = aux;
+}
+
+void invertirArregloInt(int a[], int v)
+{
+    int inicio = 0;
+    int ultimo = v-1;
+
+    while(inicio<ultimo)
+    {
+        intercambio(&a[inicio], &a[ultimo]);
+        inicio++;
+        ultimo--;
+    }
+}
+
+int buscoPosMenorINT (int a[], int v, int pos)
+{
+    int menor = a[pos];
+    int posMenor = pos;
+    int i = pos +1;
+
+    while (i<v)
+    {
+        if(menor>a[i])
+        {
+            menor = a[i];
+            posMenor = i;
+        }
+     i++;
+    }
+
+    return posMenor;
+}
+
+void ordenacionxseleccionINT(int a[], int v)
+{
+    int posMenor;
+    int aux;
+    int i = 0;
+
+    while(i<v-1)
+    {
+        posMenor = buscoPosMenorINT(a, v, i);
+        aux = a[posMenor];
+        a[posMenor]= a[i];
+        a[i] = aux;
+        i++;
+    }
+}
+
+int insertarDatoOrdenadoInt(int a[], int v, int dato)
+{
+    int i = v-1;
+
+    while(i>= 0 && a[i] > dato)
+    {
+        a[i+1] = a[i];
+        i--;
+    }
+    a[i+1] = dato;
+
+    return v+1;
+}
+
+void ordenacionxinsercionInt(int a[], int v)
+{
+    for(int i=0; i<v; i++)
+    {
+        insertarDatoOrdenadoInt(a, i, a[i]);
+    }
+}
+

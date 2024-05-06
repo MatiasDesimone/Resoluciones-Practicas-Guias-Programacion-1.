@@ -1,0 +1,569 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+int main()
+{
+
+
+//    //PILAS
+//
+//    Pila pilita;
+//    inicpila(&pilita);
+//    Pila aux;
+//    inicpila(&aux);
+//    //se pueden declarar 2 pilas pero se inicializan de a 1.
+//    //solo almacena ENTEROS y hasta 50 ENTEROS.
+//
+//    int numero = 0;
+//
+//    apilar(&pilita, 1);
+//    apilar(&pilita, numero);
+//    apilar(&pilita, 8);
+//    apilar(&pilita, 15);
+//
+//    mostrar(&pilita);
+//
+//    leer(&pilita);
+//
+//    mostrar(&pilita);
+//
+//    for( int i=0; i<5; i++){
+//        leer(&pilita);
+//    }
+//
+//    mostrar(&pilita);
+//
+//
+////    int tope= tope(&pilita);
+//    printf("tope= %d", tope(&pilita));
+////    tope(&pilita);
+//    mostrar(&pilita);
+//
+//    desapilar(&pilita);
+//    mostrar(&pilita);
+//
+//
+//    apilar(&aux, desapilar(&pilita));
+//    mostrar(&aux);
+//
+//    while(!pilavacia(&pilita)){
+//          apilar(&aux, desapilar(&pilita));
+//          desapilar(&pilita);
+//
+//          }
+
+
+
+//   1.- Cargar desde el teclado una pila DADA con 5 elementos. Pasar los tres primeros
+//elementos que se encuentren en el tope a la pila AUX1 y los restantes a la pila
+//AUX2, ambas pilas inicializadas.
+
+//      Pila pila1;
+//      inicpila(&pila1);
+//      Pila aux1;
+//      inicpila(&aux1);
+//      Pila aux2;
+//      inicpila(&aux2);
+//
+//
+//      apilar(&pila1, 1);
+//      apilar(&pila1, 2);
+//      apilar(&pila1, 3);
+//      apilar(&pila1, 4);
+//      apilar(&pila1, 5);
+//      printf("PILA DADA.\n");
+//      mostrar(&pila1);
+//
+//      system("pause");
+//      printf("\n");
+//
+//      apilar(&aux1, desapilar(&pila1));
+//      apilar(&aux1, desapilar(&pila1));
+//      apilar(&aux1, desapilar(&pila1));
+//
+//      printf("DESAPILO\n");
+//      mostrar(&pila1);
+//      printf("APILO EN AUX1\n");
+//      mostrar(&aux1);
+//
+//      system("pause");
+//      printf("\n");
+//
+//      apilar(&aux2, desapilar(&pila1));
+//      apilar(&aux2, desapilar(&pila1));
+//
+//      printf("DESAPILO EL RESTO\n");
+//      printf("LA PILA QUEDA VACIA\n");
+//      mostrar(&pila1);
+//      printf("APILO EN AUX2\n");
+//      mostrar(&aux2);
+
+
+//2.- Cargar desde el teclado la pila ORIGEN e inicializar en vacío la pila DESTINO.
+//Pasar todos los elementos de la pila ORIGEN a la pila DESTINO.
+
+//        Pila origen;
+//        inicpila (&origen);
+//        Pila destino;
+//        inicpila (&destino);
+//
+//        for( int i = 0; i < 10; i++){
+//        leer(&origen);
+//    }
+//        mostrar(&origen);
+//
+//        system("pause");
+//        printf("\n");
+//
+//        while(!pilavacia(&origen)){
+//        apilar(&destino, desapilar(&origen));
+//        }
+//        mostrar(&origen);
+//        mostrar(&destino);
+
+
+//        3.- Cargar desde teclado una pila DADA y pasar a la pila DISTINTOS todos aquellos
+//elementos distintos al valor 8.
+
+//          Pila origen;
+//          inicpila (&origen);
+//          Pila distintos;
+//          inicpila (&distintos);
+//
+//
+//          for (int i=0;i<5;i++){
+//            leer(&origen);
+//          }
+//          mostrar(&origen);
+//
+//          system("pause");
+//
+//          if((&origen) != 8){
+//                do {
+//                   apilar(&distintos, desapilar(&origen));
+//                }while(!pilavacia(&origen));
+//          }
+//
+//
+//
+//          mostrar(&origen);
+//          mostrar(&distintos);
+//
+//    3.- Cargar desde teclado una pila DADA y pasar a la pila DISTINTOS todos aquellos
+//elementos distintos al valor 8.
+//
+//    Pila dada, distintos, aux;
+//    inicpila (&aux);
+//    inicpila (&dada);
+//    inicpila (&distintos);
+//
+//    char control;
+//    do{
+//        printf("Agrega un valor para la Pila\n");
+//        leer(&dada);
+//        printf("presione c para continuar cargandos elementos a la pila\n");
+//        fflush(stdin);
+//        scanf("%c", &control);
+//        //se puede usar getche.
+//    }while(control == 'c' || control == 'C');
+//
+//    printf("Pila dada");
+//    mostrar(&dada);
+//
+//    while (!pilavacia(&dada)){
+//        if (tope(&dada) != 8){
+//            apilar(&distintos, desapilar(&dada));
+//        } else{
+//            apilar(&aux, desapilar(&dada));
+//            }
+//    }
+//
+//    while (!pilavacia(&aux)){
+//            apilar(&dada, desapilar(&aux));
+//    }
+//
+//
+//    mostrar(&dada);
+//    mostrar(&distintos);
+
+
+//4.- Cargar desde el teclado la pila ORIGEN e inicializar en vacío la pila DESTINO.
+//Pasar los elementos de la pila ORIGEN a la pila DESTINO, pero dejándolos en el
+//mismo orden.
+
+//      Pila origen, destino, aux;
+//      inicpila (&aux);
+//      inicpila (&origen);
+//      inicpila (&destino);
+//      char control;
+//
+//    do{
+//        printf("Agrega un valor para la Pila\n");
+//        fflush(stdin);
+//        leer(&origen);
+//        printf("presione c para continuar cargandos elementos a la pila\n");
+//        fflush(stdin);
+//        scanf("%c", &control);
+//    }while(control == 'c' || control == 'C');
+//
+//    printf("Pila origen.\n");
+//    mostrar(&origen);
+//
+//    do {
+//        apilar(&aux, desapilar(&origen));
+//    }while (!pilavacia(&origen));
+//
+//    do {
+//        apilar(&destino, desapilar(&aux));
+//    }while (!pilavacia(&aux));
+//
+//    printf("Pila destino\n");
+//    mostrar(&destino);
+
+
+//5.- Cargar desde el teclado la pila DADA. Invertir la pila de manera que DADA
+//contenga los elementos cargados originalmente en ella, pero en orden inverso.
+
+//      Pila dada, aux, auxx;
+//      inicpila(&dada);
+//      inicpila(&aux);
+//      inicpila(&auxx);
+//      char control;
+//
+//      do{
+//
+//        printf("Ingrese un valor para la pila dada.\n");
+//        fflush(stdin);
+//        leer(&dada);
+//
+//        printf("Presione c para continuar cargando elementos a la pila.\n");
+//        fflush(stdin);
+//        scanf("%c", &control);
+//      }while ( control == 'c' || control == 'C');
+//
+//      printf("Pila dada:\n");
+//      mostrar(&dada);
+//
+//      do {
+//        apilar(&aux, desapilar(&dada));
+//      }while (!pilavacia(&dada));
+//
+//      do {
+//        apilar(&auxx, desapilar(&aux));
+//      }while (!pilavacia(&aux));
+//
+//      do {
+//        apilar(&dada, desapilar(&auxx));
+//      }while (!pilavacia(&auxx));
+//
+//      printf("Pila dada invertida:\n");
+//      mostrar(&dada);
+
+
+//6.- Pasar el primer elemento (tope) de la pila DADA a su última posición (base),
+//dejando los restantes elementos en el mismo orden.
+
+//
+//        Pila dada, aux;
+//        inicpila(&dada);
+//        inicpila(&aux);
+//        int top = 0;
+//        char control;
+//
+//        do {
+//            printf("Ingrese un valor para la pila DADA\n");
+//            fflush(stdin);
+//            leer(&dada);
+//
+//            printf("Ingrese la letra 'c' para poder seguir ingresando valores a la pila DADA.\n");
+//            fflush(stdin);
+//            scanf("%c", &control);
+//
+//        }while( control == 'c' || control == 'C');
+//
+//        printf("Pila DADA:\n");
+//        mostrar(&dada);
+//
+//        system("pause");
+//        printf("\n");
+//
+//        top = tope(&dada);
+//        desapilar(&dada);
+//
+//        do{
+//            apilar(&aux, desapilar(&dada));
+//        }while (!pilavacia(&dada));
+//
+//        apilar(&dada, top);
+//
+//        do{
+//            apilar(&dada, desapilar(&aux));
+//        }while (!pilavacia(&aux));
+//
+//
+//        printf("Pila final:\n");
+//        mostrar(&dada);
+
+
+
+//NUMEROS ALEATORIOS.
+
+//
+//    Pila random;
+//    inicpila(&random);
+//    srand(time(NULL));
+//
+//    int numero;
+//    numero= rand()%10 +1;
+////el %numero despues del rand establece el valor limite;
+//    printf("numero= %d\n", numero);
+//
+//    //cantidad aleatoria de apiladas, max 50.
+//    int cantidad = rand()%49+1;
+//    printf("cantidad= %d\n", cantidad);
+//
+////cargar una pila con numeros aleatorios;
+//for(int i = 0 ; i<cantidad ;i++){
+//
+//        apilar(&random, rand()%10 + 1);
+//
+//}
+//
+//
+//
+//
+//mostrar(&random);
+
+
+//8- while {apilar 1, apilar 2 } if para impar.
+
+
+//9.- Comparar la cantidad de elementos de las pilas A y B. Mostrar por pantalla el
+//resultado.
+
+
+//Pila a, b;
+//Pila aux_a, aux_b;
+//inicpila (&a);
+//inicpila (&b);
+//inicpila (&aux_a);
+//inicpila (&aux_b);
+//
+//int cantidad_a, cantidad_b;
+//cantidad_a = rand()%9+1;
+//cantidad_b = rand()%9+1;
+//
+//for(int i = 0 ; i < cantidad_a; i++){
+//    apilar(&a, rand()%9 +1);
+//}
+//mostrar(&a);
+//
+//for(int i = 0 ; i < cantidad_b; i++){
+//    apilar(&b, rand()%9 +1);
+//}
+//mostrar(&b);
+//
+////while(!pilavacia (&a) && !pilavacia(&b) && tope(&a) == tope(&b)) para ver si son iguales.
+////El while ejecuta la condicion por ORDEN.
+//
+//while(!pilavacia (&a) && !pilavacia(&b)){
+//    apilar(&aux_a, desapilar(&a));
+//    apilar(&aux_b, desapilar(&b));
+//}
+//
+//if(pilavacia(&a) && pilavacia (&b)){
+//    printf("Las pilas tienen la misma cantidad de elementos");
+//}else{
+//    printf("Las pilas no tienen la misma cantidad de elementos");
+//}
+
+
+//11.- Suponiendo la existencia de una pila MODELO que no esté vacía, eliminar de la
+//pila DADA todos los elementos que sean iguales al tope de la pila MODELO.
+
+//Pila modelo, dada, aux_dada, descarte;
+//inicpila (&modelo);
+//inicpila (&dada);
+//inicpila (&aux_dada);
+//inicpila (&descarte);
+//
+//apilar(&modelo, 5);
+//
+//for(int i = 0; i < 10; i++){
+//    apilar(&dada, rand()%5 +1);
+//}
+//printf("pila dada con numeros aleatorios\n");
+//mostrar(&dada);
+//system("pause");
+//
+//while (!pilavacia(&dada)){
+//    if (tope(&dada) == tope (&modelo)){
+//        apilar(&descarte, desapilar(&dada));
+//    }else{
+//        apilar(&aux_dada, desapilar(&dada));
+//    }
+//}
+//
+//while(!pilavacia(&aux_dada)){
+//    apilar(&dada, desapilar(&aux_dada));
+//}
+//
+//printf("pila dada sin los elementos iguales al tope de modelo\n");
+//mostrar(&dada);
+
+
+//12.- Suponiendo la existencia de una pila MODELO (vacía o no), eliminar de la pila
+//DADA todos los elementos que existan en MODELO
+
+
+//    srand(time(NULL));
+//
+//    Pila modelo, dada, aux_dada, descarte;
+//    inicpila (&modelo);
+//    inicpila (&dada);
+//    inicpila (&aux_dada);
+//    inicpila (&descarte);
+//
+//
+//    int cantidad_a;
+//    cantidad_a = rand()%5;
+//    printf("cantidad %d\n", cantidad_a);
+//
+//    for(int i = 0 ; i < cantidad_a; i++)
+//    {
+//        apilar(&modelo, rand()%9 +1);
+//    }
+//    printf("Pila Modelo:\n");
+//    mostrar(&modelo);
+//
+//
+//    for(int i = 0; i < 10; i++)
+//    {
+//        apilar(&dada, rand()%9 +1);
+//    }
+//    printf("Pila dada con valores random:\n");
+//    mostrar(&dada);
+//    system("pause");
+//
+//
+//    while(!pilavacia(&modelo)){
+//        while (!pilavacia(&dada))
+//        {
+//            if (tope(&dada) == tope(&modelo))
+//            {
+//                apilar(&descarte, desapilar(&dada));
+//            }
+//            else
+//            {
+//                apilar(&aux_dada, desapilar(&dada));
+//            }
+//        }
+//
+//
+//        while(!pilavacia(&aux_dada))
+//        {
+//            apilar(&dada, desapilar(&aux_dada));
+//        }
+//
+//       apilar(&descarte, desapilar(&modelo));
+//
+//    }
+//
+//    printf("Resultado final:\n");
+//    mostrar(&dada);
+//
+
+
+//13.- Suponiendo la existencia de una pila LÍMITE, pasar los elementos de la pila
+//DADA que sean mayores o iguales que el tope de LIMITE a la pila MAYORES, y los
+//elementos que sean menores a la pila MENORES
+
+//srand(time(NULL));
+//
+//Pila limite, dada, mayores, menores;
+//inicpila(&limite);
+//inicpila(&dada);
+//inicpila(&mayores);
+//inicpila(&menores);
+//
+//
+//
+//apilar(&limite, 5);
+//printf("Pila limite:\n");
+//mostrar(&limite);
+//
+//
+//for (int i=0; i < 10; i++){
+//    apilar(&dada, rand()%9 +1);
+//}
+//printf("Pila dada:\n");
+//mostrar(&dada);
+//system("pause");
+//
+//
+//while(!pilavacia(&dada)){
+//    if (tope(&limite) <= tope(&dada)){
+//        apilar(&mayores, desapilar(&dada));
+//    }else{
+//    apilar(&menores, desapilar(&dada));
+//    }
+//}
+//
+//
+//printf("Pila mayores:\n");
+//mostrar(&mayores);
+//
+//printf("Pila menores:\n");
+//mostrar(&menores);
+
+
+//14.- Determinar si la cantidad de elementos de la pila DADA es par. Si es par, pasar
+//el elemento del tope de la pila AUX a la pila PAR y si es impar pasar el tope a la pila
+//IMPAR (NO contar los elementos)
+//
+//    srand(time(NULL));
+//
+//    Pila dada, aux, par, impar;
+//    inicpila(&dada);
+//    inicpila(&aux);
+//    inicpila(&impar);
+//    inicpila(&par);
+//
+//
+//    int cantidad_dada;
+//    cantidad_dada = rand()%10+1;
+//    printf("cantidad %d\n", cantidad_dada);
+//
+//    for(int i=0; i<cantidad_dada; i++)
+//    {
+//        apilar (&dada, rand()%9+1);
+//    }
+//    printf("Pila dada:\n");
+//    mostrar(&dada);
+//
+//
+//    for(int i=0; i<10; i++)
+//    {
+//        apilar (&aux, rand()%9+1);
+//    }
+//    printf("Pila auxiliar:\n");
+//    mostrar(&aux);
+//
+//
+//    if(cantidad_dada%2==0)
+//    {
+//        apilar(&par, desapilar(&aux));
+//        printf("pila par:\n");
+//        mostrar(&par);
+//    }
+//    else
+//    {
+//        apilar(&impar, desapilar(&aux));
+//               printf("pila impar:\n");
+//               mostrar(&impar);
+//    }
+//
+
+    return 0;
+}

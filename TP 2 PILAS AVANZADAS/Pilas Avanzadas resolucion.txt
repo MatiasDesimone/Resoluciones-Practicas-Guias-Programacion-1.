@@ -1,0 +1,795 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+#include <time.h>
+#include <conio.h>
+#include <math.h>
+
+
+int main()
+{
+
+//    1.- Sumar los elementos de una pila (usar variables enteras)
+//
+//    Pila x, aux;
+//    inicpila(&aux);
+//    inicpila(&x);
+//    char control=0;
+//    int contador=0;
+//
+//
+//    printf("Cargando valores a la pila 'X'.\n\n");
+//
+//
+//    do
+//    {
+//        printf("Ingrese a la pila un valor entero:\n\n");
+//        fflush(stdin);
+//        leer(&x);
+//        printf("Para cargar mas elementos a la pila presione 's'.\n\n");
+//        fflush(stdin);
+//        scanf("%c", &control);
+//    }
+//    while(control == 's' || control == 'S');
+//
+//
+//    printf("Sumando los valores que posee la pila:\n\n");
+//    system("pause");
+//
+//
+//    while(!pilavacia(&x))
+//    {
+//        contador += tope(&x);
+//        apilar(&aux, desapilar(&x));
+//    }
+//
+//
+//    printf("El monto de los valores introducidos en la pila 'x' es %d", contador);
+//
+//
+//    while(!pilavacia(&aux))
+//    {
+//        apilar(&x, desapilar(&aux));
+//    }
+//
+//
+//    mostrar(&x);
+
+
+
+
+//    2.- Contar los elementos de una pila (usar variables enteras)
+//
+//    Pila x, aux;
+//    inicpila(&aux);
+//    inicpila(&x);
+//    char control=0;
+//    int contador=0;
+//
+//
+//    do
+//    {
+//        printf("Ingrese a la pila un valor entero:\n\n");
+//        fflush(stdin);
+//        leer(&x);
+//        printf("\n");
+//        printf("Presione cualquier tecla para cargar mas elementos a la pila, para finalizar presione 'Escape'.\n\n");
+//        fflush(stdin);
+//        control = getche();
+//    }
+//    while(control != 27);
+//
+//
+//    printf("Contando los valores que posee la pila:\n\n");
+//    system("pause");
+//
+//    while(!pilavacia(&x))
+//    {
+//        contador++;
+//        apilar(&aux, desapilar(&x));
+//    }
+//
+//
+//    printf("La cantidad de valores introducidos en la pila 'x' es %d", contador);
+//
+//
+//    while(!pilavacia(&aux))
+//    {
+//        apilar(&x, desapilar(&aux));
+//    }
+//
+//
+//    mostrar(&x);
+
+
+
+
+    //3. Calcular el promedio de los valores de una pila (usar variables)
+//
+//    Pila pilita, aux;
+//    inicpila(&pilita);
+//    inicpila(&aux);
+//    char control = 0;
+//    int contador = 0;
+//    int acumulador = 0;
+//    float promedio = 0;
+//
+//
+//    do
+//    {
+//        printf("Ingrese a la pila un valor entero:\n\n");
+//        fflush(stdin);
+//        leer(&pilita);
+//        printf("\n");
+//        printf("Presione cualquier tecla para cargar mas elementos a la pila, para finalizar presione 'Escape'.\n\n");
+//        fflush(stdin);
+//        control=getche();
+//    }
+//    while(control!=27);
+//
+//    printf("Se procedera a realizar el calculo del promedio de la pila:\n\n");
+//    system("pause");
+//
+//
+//    while(!pilavacia(&pilita))
+//    {
+//        acumulador += tope(&pilita);
+//        apilar(&aux, desapilar(&pilita));
+//    }
+//
+//    while(!pilavacia(&aux))
+//    {
+//        contador++;
+//        apilar(&pilita, desapilar(&aux));
+//    }
+//
+//    promedio = acumulador / contador;
+//
+//    printf("El promedio de la pila ingresada es : %.2f.", promedio);
+
+
+
+
+// 4. Encontrar el menor elemento de una pila y guardarlo en otra. (sin variables, solo pilas)
+
+//Ejercicio 4 - Encontrar el menor (solo pilas)
+
+//    Pila dada, aux, menor;
+//
+//    inicpila(&dada);
+//    inicpila(&aux);
+//    inicpila(&menor);
+//    srand(time(NULL));
+//
+//    int numero = 0;
+//
+//    for(int i = 0; i <  8; i++)
+//    {
+//        numero = rand()% 10 + 1;
+//        apilar(&dada,numero);
+//    }
+//
+//    mostrar(&dada);
+//
+//    if(!pilavacia(&dada)){
+//        apilar(&menor, desapilar(&dada));
+//    }
+//
+//    while(!pilavacia(&dada)){
+//        if(tope(&dada) < tope(&menor)){
+//            apilar(&aux, desapilar(&menor));
+//            apilar(&menor, desapilar(&dada));
+//        }else{
+//            apilar(&aux, desapilar(&dada));
+//        }
+//    }
+//
+//    printf("El menor elemento de la pila dada es: %d", tope(&menor));
+
+
+
+//5. Insertar un elemento en una pila ordenada de menor (tope) a mayor (base) de forma tal que se conserve el orden. (sin variables, solo pilas)
+
+    //declaro las pilas.
+    Pila dada, orden, elemento, aux;
+    //inicio las pilas.
+    inicpila (&dada);
+    inicpila (&orden);
+    inicpila (&elemento);
+    inicpila (&aux);
+    int valor = 0;//valor para ingresar a elemento.
+    //este numero es parte de la funcion para generar pilas random.
+    int numero = 0;
+    //el srand genera la aleatoriedad.
+    srand(time(NULL));
+
+    //genero la pila dada de manera random y la ordeno.
+
+    for(int i = 0; i < 8; i++) //ciclo repeticion.
+    {
+        numero = rand()%10+1; // genero numeros random para la pila, se repiten segun el for.
+        apilar(&dada, numero); //apilamos.
+    }
+    //mostramos la pila todavia desordenada.
+    printf("Pila dada:\n\n");
+    mostrar(&dada);
+    system("pause");//meto una pausa para ordenar.
+
+    while(!pilavacia (&dada)) //mientras la pila dada, no este vacia hago lo siguiente.
+    {
+        apilar(&orden, desapilar(&dada)); //separo el tope para poder compararlo con el numero que sigue.
+
+        while(!pilavacia (&dada)) //corroboro que existia un valor debajo del anterior.
+        {
+            if(tope(&dada) > tope(&orden)) //si el tope pila dada es mayor, necesito correr el menor a auxiliar.
+            {
+                apilar(&aux, desapilar(&orden));//corremos el menor a auxiliar
+                apilar(&orden, desapilar (&dada));//corremos el mayor a dada para seguir comparando.
+            }
+            else //caso contrario hay que correr el valor de dada a auxiliar.
+            {
+                apilar(&aux, desapilar(&dada));//saco en dada, apilo en aux.
+            }
+        }
+        while(!pilavacia(&aux)) //como aux tiene valores hay que pasarlos a dada para seguir ordenandolos.
+        {
+            apilar(&dada, desapilar(&aux));//paso los valores de aux a dada para continuar ordenando.
+        }
+    }
+    //muestro como quedo ordenada la pila "orden", menor "tope, mayor "base".
+    printf("Pila ordenada, de menor 'tope' a mayor 'base':\n\n");
+    mostrar(&orden);//mostramos orden.
+    system("pause");//pausa para ordenar.
+
+    //se procede a escanear el valor a introducir que se quiera y a ordenarlo nuevamente.
+    printf("Ingrese el elemento a ordenar.\n\n");
+    fflush(stdin);
+    scanf ("%d", &valor);
+    printf("Usted ha ingresado el valor: %d. Se procedera a ordenarlo en la pila.\n\n", valor);
+    apilar(&elemento, valor);
+
+    //paso todo los valores a "dada" para ordenar en "orden".
+    apilar(&dada, desapilar(&elemento));
+    while(!pilavacia(&orden))
+    {
+        apilar(&dada, desapilar(&orden));
+    }
+
+    //vuelvo a iniciar el ordenamiento por seleccion.
+    while(!pilavacia(&dada))//mientras dada no este vacia, paso un valor para comparar.
+    {
+        apilar(&orden, desapilar(&dada));//paso el valor a orden.
+
+        while(!pilavacia(&dada))//mientras dada no este vacia, tengo un segundo valor para comparar.
+        {
+            if(tope(&dada)>tope(&orden)) //comparo los dos topes.
+            {
+                apilar(&aux, desapilar(&orden));//como el tope de orden es menor, lo corro a aux.
+                apilar(&orden, desapilar(&dada));//como el tope de dada es mayor, lo paso a orden.
+            }
+            else
+            {
+                apilar(&aux, desapilar(&dada));//caso contrario como el tope de dada era menor que el tope de orden, paso el valor de dada a aux.
+            }
+        }
+        while(!pilavacia(&aux)) //como aux tiene valores, se envian a dada, para seguir comparando y ordenando.
+        {
+            apilar(&dada, desapilar (&aux));
+        }
+    }
+
+    printf("Pila final ordenada con el valor introducido incluido:\n\n");
+    mostrar(&orden);
+
+
+SOLUCION DE LA CATEDRA: ordenamiento por insercion, la que corresponde.
+
+        srand(time(NULL));
+        Pila dada, aux;
+        inicpila(&dada);
+        inicpila(&aux);
+
+        apilar(&dada, -1);
+        apilar(&dada, 2);
+        apilar(&dada, 4);
+        apilar(&dada, 6);
+        apilar(&dada, 8);
+
+        mostrar(&dada);
+
+        int elementoAIngresar = 5;
+
+        while(!pilavacia(&dada) && tope(&dada) > elementoAIngresar)
+        {
+            apilar(&aux,desapilar(&dada));
+        }
+
+        apilar(&dada,elementoAIngresar);
+
+        while(!pilavacia(&aux))
+        {
+            apilar(&dada, desapilar(&aux));
+        }
+
+        mostrar(&dada);
+
+
+
+ //  Usando lo resuelto en el ejercicio 4, pasar los elementos de una pila a otra de forma tal que la segunda pila quede ordenada de mayor (tope) a menor (base). Esto se llama método de ordenación por selección.
+//   Ejercicio 6 - Ordenación X Selección
+//
+//    Pila dada, aux, menor;
+//
+//    inicpila(&dada);
+//    inicpila(&aux);
+//    inicpila(&menor);
+//    srand(time(NULL));
+//    int numero = 0;
+//
+//    for(int i = 0; i <  8; i++)
+//    {
+//        numero = rand()% 10 + 1;
+//        apilar(&dada,numero);
+//    }
+//
+//
+//    mostrar(&dada);
+//
+//    while(!pilavacia(&dada))
+//    {
+//        apilar(&menor, desapilar(&dada));
+//
+//        while(!pilavacia(&dada))
+//        {
+//            if(tope(&dada) < tope(&menor))
+//            {
+//                apilar(&aux, desapilar(&menor));
+//                apilar(&menor, desapilar(&dada));
+//            }
+//            else
+//            {
+//                apilar(&aux, desapilar(&dada));
+//            }
+//        }
+//
+//        while(!pilavacia(&aux))
+//        {
+//            apilar(&dada,desapilar(&aux));
+//        }
+//
+//    }
+//    mostrar(&menor);
+
+
+
+
+//7. Determinar si un elemento buscado está dentro de una pila. Al encontrarlo, finalizar la búsqueda.
+
+//Pila dada, aux;
+//    inicpila(&dada);
+//    inicpila(&aux);
+//
+//    int numero = 0;
+//    int numeroABuscar;
+//    int flag = 0 ;
+//
+//    for(int i = 0; i <  8; i++)
+//    {
+//        numero = rand()% 10 + 1;
+//        apilar(&dada,numero);
+//    }
+//
+//    mostrar(&dada);
+//
+//    printf("Ingrese el numero a buscar: ");
+//    scanf("%d",&numeroABuscar);
+//
+//    while(!pilavacia(&dada) && flag == 0)
+//    {
+//        if(tope(&dada) == numeroABuscar)
+//        {
+//            flag = 1;
+//            // borrar elemento: apilar(&descarte, desapilar(&dada);
+//        }
+//        else
+//        {
+//            apilar(&aux,desapilar(&dada));
+//        }
+//    }
+//
+//    while(!pilavacia(&aux)){
+//        apilar(&dada,desapilar(&aux));
+//    }
+//
+//
+//    if(flag == 0){
+//        printf("El numero NO existe en la pila");
+//    }else{
+//        printf("El numero existe en la pila");
+//    }
+//
+//    mostrar(&dada);
+
+
+
+
+//8. Eliminar un elemento de una pila. El eliminarlo, finalizar el recorrido y dejar el resto en el mismo orden.
+
+    Pila dada, aux, descarte;//declaro pilas
+
+    inicpila(&dada);//las inicializo
+    inicpila(&aux);
+    inicpila(&descarte);
+
+    srand(time(NULL));//numeros random
+
+    int numero = 0; //numero para el for.
+    int numeroABuscar = 0;//valor a buscar para eliminar.
+    int flag = 0;//true or false.
+
+    for(int i = 0; i < 8; i++) //genero valores random para la pila-.
+    {
+        numero = rand()%10+1;
+        apilar(&dada, numero);
+    }
+    //muestro la pila dada
+    printf("Pila dada:\n\n");
+    mostrar(&dada);
+    system("pause");
+
+    printf("Introduzca el valor de la pila a eliminar:\n\n");//se pide al usuario el valor a eliminar.
+    fflush(stdin);
+    scanf("%d", &numeroABuscar);
+    printf("El valor ingresado es:%d\n\n", numeroABuscar);
+    system("pause");
+
+
+    while(!pilavacia(&dada) && flag == 0) //mientras que dada no este vacia, o flag sea 0 sigue buscando.
+    {
+        if(tope(&dada) == numeroABuscar) // si encuentra la igualdad, flag pasa a valer 1, y se desapila el numero de dada.
+        {
+            flag = 1;
+            apilar(&descarte, desapilar (&dada));
+        }
+        else//si no encuentra la igualdad, desapila a aux y pasa a analizar el siguiente valor.
+        {
+            apilar(&aux, desapilar(&dada));
+        }
+    }
+
+
+    while(!pilavacia(&aux))//luego de haber analizado la pila dada, devuelve los valores que quedaron en aux devuelta a dada.
+    {
+        apilar(&dada, desapilar(&aux));
+    }
+
+    //finalizo con la respuesta. Si no se encontro igualdad en la pila es porque el usuario no ingreso un valor valido.
+    if(flag == 0)
+    {
+        printf("El numero ingresado no existe en la pila.\n\n");
+    }
+    else//caso contrario, se muestra la pila ya sin el valor.
+    {
+        printf("El numero ingresado fue retirado de la pila.\n\n");
+        mostrar(&dada);
+    }
+
+
+
+
+
+//9. Verificar si una pila DADA es capicúa.
+
+    /// Para realizar el ejercicio debo crear una pila y su copia, invertir la copia y compararla con la original.
+    /// Si la pila original y su copia invertida son iguales, la pila es capicua.
+
+    Pila dada, copia, invertida, aux;//declaro pilas
+
+    inicpila (&dada);//inicializo pilas
+    inicpila (&copia);
+    inicpila(&invertida);
+    inicpila (&aux);
+
+    int flag = 0; //true or false.
+    char control = 0;//char para el do while de ingresar valores.
+
+    do//estructura para cargar valores mientras el usuario desee.
+    {
+        printf("Ingrese un valor entero para la pila:\n\n");
+        fflush(stdin);
+        leer(&dada);//cargo la pila dada
+        apilar(&copia, tope(&dada));//cargo la pila copia
+        printf("\n");
+        printf("Presione cualquier tecla para seguir cargando valores, presione ESCAPE para salir.\n\n");
+        fflush(stdin);
+        control = getche();
+    }
+    while(control != 27);
+
+    printf("Pila ingresada:\n\n");//muestro la pila cargada.
+    mostrar(&dada);
+    system("pause");
+
+    while(!pilavacia(&copia))
+    {
+        apilar(&invertida, desapilar (&copia));//mientras haya valores en copia, los invierto en pila invertida.
+    }
+
+    while(!pilavacia(&invertida) && flag == 0)//mientras que invertida no este vacia o flag no sea 1 analizo.
+    {
+        if(tope(&invertida) == tope(&dada))//si el tope de invertida y dada es igual, continuo.
+        {
+            apilar(&aux, desapilar(&dada));//para analizar el que sigue, desapilo en dada, y lo almaceno en auxiliar
+            apilar(&copia, desapilar(&invertida));// y el valor de invertida lo devuelvo a copia.
+        }
+        else//en caso de que no se compruebe la igualdad, flag pasa a valer 1 y se corta el ciclo.
+        {
+            flag = 1;
+        }
+    }
+
+    while(!pilavacia(&aux))//devuelvo los valores de aux a dada por orden
+    {
+        apilar(&dada, desapilar(&aux));
+    }
+    while(!pilavacia(&invertida))//devuelvo los valores de invertida a copia por orden
+    {
+        apilar(&copia, desapilar(&invertida));
+    }
+
+
+    if (flag == 0)//finalizo con la respuesta.-
+    {
+        printf("La pila ingresada es CAPICUA.");//como flag fue 0 durante todo el ciclo, quiere decir que la pila es capicua.
+    }
+    else
+    {
+        printf("La pila ingresada no es CAPICUA.");//como flag paso a ser 1 quiere decir que en un punto la igualdad no se comprobo.
+    }
+
+
+OTRA RESOLUCION POSIBLE, LA DE LA CATEDRA:
+
+ Pila dada, copia, aux, aux1, aux2;
+    inicpila(&dada);
+    inicpila(&copia);
+    inicpila(&aux);
+    inicpila(&aux1);
+    inicpila(&aux2);
+
+    apilar(&dada, 5);
+    apilar(&dada, 2);
+    apilar(&dada, 1);
+    apilar(&dada, 2);
+    apilar(&dada, 5);
+    apilar(&dada, 6);
+
+
+    while(!pilavacia(&dada))
+    {
+        apilar(&copia, tope(&dada));
+        apilar(&aux, desapilar(&dada));
+    }
+
+    while(!pilavacia(&aux))
+    {
+        apilar(&dada,desapilar(&aux));
+    }
+
+    while(!pilavacia(&dada) && !pilavacia(&copia) && tope(&dada) == tope(&copia))
+    {
+        apilar(&aux2, desapilar(&dada));
+        apilar(&aux1, desapilar(&copia));
+    }
+
+    if(pilavacia(&dada) && pilavacia(&copia))
+    {
+        printf("la pila es capicua");
+    }
+    else
+    {
+        printf("la pila no es capicua");
+    }
+
+
+
+//10. Dadas dos pilas A y B que simulan conjuntos (cada conjunto no tiene elementos repetidos sobre sí mismo)
+    // realizar un programa que calcule en la pila C la operación de unión.
+
+    /// formula de union : A+B = A+B-AnB.
+
+
+    //declaro las pilas.
+    Pila a, b, c, descarte;
+    //inicializo las pilas.
+    inicpila(&a);
+    inicpila(&b);
+    inicpila(&c);
+    inicpila(&descarte);
+
+    char control = 0;
+    //variable para el for.
+
+
+
+    do//cargo valores a la pila A
+    {
+        printf("Ingrese un valor entero para la pila, no ingrese valores repetidos:\n\n");
+        fflush(stdin);
+        leer(&a);
+        printf("Presione cualquier tecla para continuar ingresando valores, presione ESCAPE para salir.");
+        fflush(stdin);
+        control=getche();
+    }
+    while(control != 27);
+
+    printf("Pila A:\n\n");//muestro la pila A
+    mostrar(&a);
+    system("pause");
+
+    control = 0;
+
+    do//cargo valores a la pila B
+    {
+        printf("Ingrese un valor entero para la pila, no ingrese valores repetidos:\n\n");
+        fflush(stdin);
+        leer(&b);
+        printf("Presione cualquier tecla para continuar ingresando valores, presione ESCAPE para salir.");
+        fflush(stdin);
+        control=getche();
+    }
+    while(control != 27);
+
+    printf("Pila B:\n\n");//muestro la pila B
+    mostrar(&b);
+
+    //union
+    while(!pilavacia(&a))//si A no esta vacia, la paso para A
+    {
+        apilar(&c, desapilar(&a));
+    }
+
+    while(!pilavacia(&b))//si B no esta vacia, comparo el tope con C, para eliminar la interceccion.
+    {
+        if(tope(&b) != tope(&c))//no hay interseccion, desapilo en B y apilo en C.
+        {
+            apilar(&c, desapilar(&b));
+        }
+        else
+        {
+            apilar(&descarte, desapilar(&b));//hay interseccion, descarto en B y despues apilo en C. 
+            apilar(&c, desapilar(&b));
+        }
+    }
+
+    printf("Pila union:\n\n");
+    mostrar(&c);//muestro el resultado
+
+este de union debe estar mal.
+
+   
+
+
+//11. Intercalar dos pilas ordenadas en forma creciente (ORDENADA1 y ORDENADA2) dejando el resultado en una pila también ordenada en forma creciente (ORDENADAFINAL).
+
+    Pila ordenada1, ordenada2, ordenadaFinal, aux1, aux2;
+
+    inicpila(&ordenada1);
+    inicpila(&ordenada2);
+    inicpila(&ordenadaFinal);
+    inicpila(&aux1);
+    inicpila(&aux2);
+
+    int numero = 1;
+
+    for(int i = 0; i<3; i++)
+    {
+        numero= numero*3;
+        apilar(&ordenada1, numero);
+    }
+
+    mostrar(&ordenada1);
+
+    numero = 2;
+
+    for(int i = 0; i<4; i++)
+    {
+        numero=numero*2;
+        apilar(&ordenada2, numero);
+    }
+    mostrar(&ordenada2);
+
+
+    while(!pilavacia(&ordenada1))
+    {
+        apilar(&aux1, desapilar (&ordenada1));
+    }
+    mostrar(&aux1);
+
+
+    while(!pilavacia(&ordenada2))
+    {
+        apilar(&aux1, desapilar (&ordenada2));
+    }
+    mostrar(&aux1);
+
+
+    while(!pilavacia(&aux1))
+    {
+        apilar(&ordenadaFinal, desapilar(&aux1));
+
+
+        while(!pilavacia(&aux1))
+        {
+            if(tope(&aux1) < tope(&ordenadaFinal))
+            {
+                apilar(&aux2, desapilar(&ordenadaFinal));
+                apilar(&ordenadaFinal, desapilar(&aux1));
+            }
+            else
+            {
+                apilar(&aux2, desapilar(&aux1));
+            }
+        }
+
+        while(!pilavacia(&aux2))
+        {
+            apilar(&aux1,desapilar(&aux2));
+        }
+
+    }
+
+    printf("La pila intercalada es la siguiente:\n\n");
+    mostrar(&ordenadaFinal);
+
+
+
+
+12. Dada la pila ORIGEN ordenarla en forma ascendente por método de inserción dejando el resultado en la pila ORIGEN. Para este ejercicio usar lo aprendido para el ejercicio 5. 
+
+EJERCICIO 12 - Ordenamiento por insercion
+    /*
+        // Ejercicio 12 - Ordenamiento por inserción
+
+        srand(time(NULL));
+
+        Pila dada, aux, ordenadaInsercion;
+        inicpila(&dada);
+        inicpila(&aux);
+        inicpila(&ordenadaInsercion);
+
+
+        for(int i = 0; i < 10; i++){
+            apilar(&dada, rand()%10 +1 );
+        }
+
+        mostrar(&dada);
+
+        int dato;
+
+        while(!pilavacia(&dada))
+        {
+            dato = desapilar(&dada);
+
+
+            while(!pilavacia(&ordenadaInsercion) && tope(&ordenadaInsercion) < dato)
+            {
+                apilar(&aux,desapilar(&ordenadaInsercion));
+            }
+
+            apilar(&ordenadaInsercion,dato);
+
+            while(!pilavacia(&aux))
+            {
+                apilar(&ordenadaInsercion, desapilar(&aux));
+            }
+
+        }
+
+        mostrar(&ordenadaInsercion);
+       // mostrar(&dada);
+     */
+
+
+
+Suponer un juego de cartas en el que en cada mano se reparten dos cartas por jugador. Un jugador gana la mano cuando la suma de sus cartas es mayor que las del contrario y al hacerlo coloca todas las cartas (las de él y las de su rival) en su pila de puntos. En caso de empate (y para simplificar) siempre gana el jugador1. Simular la ejecución del juego de tal manera que dada una pila MAZO (con un número de elementos múltiplo de cuatro) distribuya las cartas en las pilas PUNTOSJUG1 y PUNTOSJUG2 como si estos hubieran jugado. Utilizar las pilas auxiliares que crea conveniente. 

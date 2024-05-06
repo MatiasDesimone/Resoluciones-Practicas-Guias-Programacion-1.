@@ -1,0 +1,291 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <time.h>
+#include "pila.h"
+
+void cargaPilaManual(Pila *p);//Ej 1
+void cargarPilaRandom(Pila *p);//carga hasta 10 numeros.
+void muestraPila(Pila p);//Muestra la pila sin funcion Mostrar.
+void pasarPila(Pila *a, Pila * b);//Ej 2
+void pasarDatosMismoOrden(Pila *a, Pila *b);//Ej 3
+int buscaMenor(Pila *p);//Ej 4
+void pasarPilaPares(Pila *a, Pila *b);
+void ordenacionXSeleccion(Pila *a, Pila *b);//Ej 5 tope mayor, base menor.
+void insertarPilaOrdenada(Pila * a, int dato);//Ej 6
+void ordenacionXInsercion(Pila * a, Pila * b);//Ej 7 tope menor, base mayor.
+int sumaTopeYSubtope(Pila p);//Ej 8
+int sumaDatosPila(Pila p);//Ej 9
+int contadorDatosPila (Pila p);//Ej 9
+float dividir(int dividendo, int divisor);//Ej 9
+void promedioPila (Pila p);//Ej 9
+
+int main()
+{
+
+    Pila pila1, pila2;
+    inicpila(&pila1);
+    cargaPilaManual(&pila1);
+
+    promedioPila(pila1);
+
+    return 0;
+}
+
+
+
+void cargaPilaManual(Pila *p)//Ej 1 guia
+{
+    int aux,aux1 = 0;
+    printf("Cuantos elementos desea cargar?: ");
+    scanf("%d",&aux);
+
+    for(int i = 0; i<aux; i++)
+    {
+        printf("Eliga el valor que desea cargar a la pila: ");
+        scanf("%d",&aux1);
+        apilar(p,aux1);
+    }
+}
+
+void cargarPilaRandom(Pila *p)
+{
+    int nro = 0;
+
+    for(int i = 0; i < 10 ; i++)
+    {
+        nro = rand()%10 +1;
+        apilar(p,nro);
+    }
+}
+
+void muestraPila(Pila p)
+{
+    Pila aux;
+    inicpila(&aux);
+    int par = 0;
+
+    printf("\nBase-------------------------------------Tope\n");
+    while(!pilavacia(&p))
+    {
+        printf("%d |",tope(&p));
+
+        apilar(&aux,desapilar(&p));
+        par++;
+    }
+}
+
+void pasarPila(Pila *a, Pila * b)//Ej 2
+{
+
+    while(!pilavacia(a))
+    {
+        apilar(b,desapilar(a));
+    }
+}
+
+void pasarDatosMismoOrden(Pila *a, Pila *b)//Ej 3
+{
+    Pila aux;
+    inicpila(&aux);
+
+    pasarPila(a,&aux);
+    pasarPila(&aux,b);
+}
+
+int buscaMenor(Pila *p)//Ej 4
+{
+    Pila aux;
+    inicpila(&aux);
+    int valorMenor;
+
+    if(!pilavacia(p))
+    {
+        valorMenor = desapilar(p);
+    }
+
+    while(!pilavacia(p))
+    {
+        if(tope(p) < valorMenor)
+        {
+            apilar(&aux,valorMenor);
+            valorMenor = desapilar(p);
+        }
+        else
+        {
+            apilar(&aux, desapilar(p));
+
+        }
+    }
+    pasarPila(&aux,p);
+//    while(!pilavacia(&aux))
+//    {
+//    apilar(p, desapilar(&aux));
+//    }
+
+return valorMenor;
+}
+
+void pasarPilaPares(Pila *a, Pila *b)
+{
+    Pila aux;
+    inicpila(&aux);
+
+    while(!pilavacia(a))
+    {
+        if(tope(a)%2==0)
+        {
+            apilar(b,desapilar(a));
+        }
+        else
+        {
+            apilar(&aux,desapilar(a));
+        }
+    }
+}
+
+void ordenacionXSeleccion(Pila *a, Pila *b)//Ej 5
+{
+    int valorMenor;
+
+    while(!pilavacia(a))
+    {
+        valorMenor = buscaMenor(a);
+        apilar(b,valorMenor);
+    }
+}
+
+void insertarPilaOrdenada(Pila * a, int dato)//Ej 6
+{
+    Pila aux;
+    inicpila(&aux);
+
+    while(!pilavacia(a) && tope(a) < dato)
+    {
+        apilar(&aux,desapilar(a));
+    }
+    apilar(a,dato);
+
+    pasarPila(&aux,a);
+}
+
+void ordenacionXInsercion(Pila * a, Pila * b)//Ej 7
+{
+    while(!pilavacia(a))
+    {
+        insertarPilaOrdenada(b,desapilar(a));
+    }
+}
+
+int sumaTopeYSubtope(Pila p)//Ej 8
+{
+    int tope, subtope, suma;
+
+    if (!pilavacia(&p))
+    {
+        tope = desapilar(&p);
+
+        if(!pilavacia(&p))
+        {
+            subtope = desapilar(&p);
+        }
+    }
+
+    suma = tope + subtope;
+
+    return suma;
+}
+
+int sumaDatosPila(Pila p)//Ej 9
+{
+    Pila aux;
+    inicpila(&aux);
+    int acumulador=0;
+
+    while(!pilavacia(&p))
+    {
+        acumulador += tope(&p);
+        apilar(&aux, desapilar(&p));
+    }
+
+//printf("La suma de los elementos de la pila da: %d.\n", acumulador);
+
+    return acumulador;
+}
+
+int contadorDatosPila (Pila p)//Ej 9
+{
+    Pila aux;
+    inicpila(&aux);
+    int contador=0;
+
+    while(!pilavacia(&p))
+    {
+        contador++;
+        apilar(&aux, desapilar(&p));
+    }
+
+//printf("La cantidad de elementos en la pila son: %d.\n", contador);
+
+    return contador;
+}
+
+float dividir(int dividendo, int divisor)//Ej 9
+{
+    if(divisor == 0)
+    {
+        printf("Te equivocaste loquita, no se puede dividir entre 0.\n");
+        return 0;
+    }else
+    {
+       return (float) dividendo / divisor ;
+    }
+}
+
+void promedioPila (Pila p)//Ej 9
+{
+    int suma, cantidad;
+
+    suma = sumaDatosPila(p);
+    printf("La suma de los elementos de la pila da: %d.\n", suma);
+
+    cantidad = contadorDatosPila(p);
+    printf("La cantidad de elementos en la pila son: %d.\n", cantidad);
+
+    float resultado = dividir(suma, cantidad);
+
+    printf("El promedio de los valores de la pila es: %.2f\n", resultado);
+}
+
+
+void cargaPilaManualUnDigito(Pila *p)//Ej 10
+{
+    int aux,aux1 = 0;
+    char control = 0;
+
+    printf("Cuantos elementos desea cargar?: ");
+    scanf("%d",&aux);
+
+    for(int i = 0; i<aux; i++)
+    {
+        printf("Elija el valor que desea cargar a la pila:\nPor favor, solo numeros de un digito.\n");
+        fflush(stdin);
+        scanf("%d",&aux1);
+
+        do
+        {
+            if(aux1<10)
+            {
+                apilar(p,aux1);
+            }
+            else
+            {
+                printf("El numero ingresado posee 2 digitos.\n");
+                printf("Si desea salir del programa presione ESCAPE, si desea continuar presione cualquier tecla.\n");
+                fflush(stdin);
+                control = getche();
+            }
+        }while(control != 27);
+
+    }
+}
