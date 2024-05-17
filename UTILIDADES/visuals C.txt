@@ -1,0 +1,117 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
+#include <string.h>
+
+#define ancho 300
+#define alto 65
+
+void gotoxy(int x, int y);
+void recuadro(int xs, int ys, int xi, int yi);
+void centrarTexto(char *texto,int y);
+void titulo();
+void barraCarga(int bordeIzq, int bordeDer, int fila);
+void ocultarCursor();
+void mostrarCursor();
+void desactivarMaximizar();
+
+int main()
+{
+    desactivarMaximizar();
+    system("mode con: cols=300 lines=65");
+    system("COLOR F0");
+    titulo();//despues de cada system cls hay que llamar a la funcion titulo si asi lo quisiera.
+    gotoxy(130, 7); system("pause");
+
+    barraCarga(15, 284, 60);
+
+
+    return 0;
+}
+
+
+void gotoxy(int x, int y)
+{
+	HANDLE hcon;
+	hcon = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD dwPos;
+	dwPos.X = x;
+	dwPos.Y= y;
+	SetConsoleCursorPosition(hcon,dwPos);
+}
+
+void recuadro(int xs, int ys, int xi, int yi)
+{
+    int i;
+
+    for(i=xs;i<=xi;i++)
+    {
+        gotoxy(i,ys); printf("%c", 196);
+        gotoxy(i,yi); printf("%c", 196);
+    }
+
+    for(i=ys;i<=yi;i++)
+    {
+        gotoxy(xs,i); printf("%c", 179);
+        gotoxy(xi,i); printf("%c", 179);
+    }
+
+    gotoxy(xs,ys); printf("%c", 218);
+    gotoxy(xi,ys); printf("%c", 191);
+    gotoxy(xs,yi); printf("%c", 192);
+    gotoxy(xi,yi); printf("%c", 217);
+
+}
+
+void centrarTexto(char *texto,int y)
+{
+    int longitud = strlen(texto);
+    gotoxy(150-(longitud/2),y); printf(texto);
+}
+
+void titulo()
+{
+    recuadro(1,0.5, 298,63);
+    recuadro(10,1, 289,5);
+    centrarTexto("La concha de la lora.",3);
+}
+
+void barraCarga(int bordeIzq, int bordeDer, int fila)
+{
+    int i;
+
+    ocultarCursor();
+    centrarTexto("C A R G A N D O . . .", 58);
+
+    for(i=bordeIzq;i<=bordeDer;i++)
+    {
+        gotoxy(i,fila); printf("%c", 177);
+    }
+
+    for(i=bordeIzq;i<=bordeDer;i++)
+    {
+        gotoxy(i,fila); printf("%c", 219);
+        Sleep(1);
+    }
+
+    gotoxy(120,58); printf("                                                ");
+    gotoxy(15,60); printf("                                                                                                                                                                                                                                                                              ");
+    mostrarCursor();
+}
+
+void ocultarCursor()
+{
+    printf("\e[?25l");
+}
+
+void mostrarCursor()
+{
+    printf("\e[?25h");
+}
+
+void desactivarMaximizar()
+{
+	HWND consoleWindow;
+	consoleWindow = GetConsoleWindow();
+	SetWindowLong(consoleWindow, GWL_STYLE,GetWindowLong(consoleWindow, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_SIZEBOX);
+}
