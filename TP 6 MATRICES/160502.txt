@@ -1,0 +1,338 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <string.h>
+#include <time.h>
+
+
+void funcionMenu();
+void cargaMatriz(int filas,int columnas, int matriz[filas][columnas]);
+void muestraMatriz(int filas, int columnas, int matriz[filas][columnas]);
+void cargaMatrizRandom(int filas, int columnas, int matriz[filas][columnas]);
+int sumaElementosMatriz(int filas, int columnas, int matriz[filas][columnas]);
+float promedioMatriz(int filas, int columnas, int matriz[filas][columnas]);
+int buscaEnMatriz(int filas, int columnas, int matriz[filas][columnas], int dato);
+
+int main()
+{
+    srand(time(NULL));
+
+    int opcion;
+
+    int const filas = 3;
+    int const columnas = 3;
+    int const letras = 31;
+
+    int matrizA [filas][columnas];
+    int matrizCargada [3][3] = {1,1,1,1,1,1,1,1,1};
+
+    int sumatoria = 0;
+    float promedio = 0;
+
+    int flag;
+    int dato;
+    
+    char matrizString [filas][letras];
+
+
+
+
+
+   while(1)
+    {
+        funcionMenu();
+        scanf("%d",&opcion);
+        system("cls");
+
+        switch (opcion)
+        {
+        case 1:
+//Hacer una función que reciba como parámetro una matriz de números enteros
+//y permita que el usuario ingrese valores al mismo por teclado.
+//La función debe cargar la matriz por completo.
+            cargaMatriz(filas, columnas, matrizA);
+            system("cls");
+            printf("Matriz cargada correctamente!\n");
+            system("pause");
+            system("cls");
+            printf("\nLa matriz cargada fue:\n");
+            muestraMatriz(filas, columnas, matrizA);
+            system("pause");
+
+            break;
+
+        case 2:
+//Hacer una función que reciba como parámetro una matriz de números enteros
+//y la muestre por pantalla (en formato matricial).
+            printf("\n--------MATRIZ--------\n");
+            muestraMatriz(3, 3, matrizCargada);
+            system("pause");
+
+            break;
+
+        case 3:
+//Hacer una función que reciba como parámetro una matriz de números enteros
+//y que cargue la misma con números aleatorios (sin intervención del usuario).
+//La función debe cargar la matriz por completo.
+            cargaMatrizRandom(filas, columnas, matrizA);
+            system("cls");
+            printf("Matriz cargada de manera RANDOM!\n");
+            system("pause");
+            system("cls");
+            printf("\nLa matriz cargada fue:\n");
+            muestraMatriz(filas, columnas, matrizA);
+            system("pause");
+
+            break;
+
+        case 4:
+//Hacer una función tipo int que sume el contenido total de una matriz de números enteros.
+            printf("\n--------MATRIZ--------\n");
+            muestraMatriz(3, 3, matrizCargada);
+            system("pause");
+            sumatoria = sumaElementosMatriz(3, 3, matrizCargada);
+            printf("\nLa suma de los elementos de la matriz arroja %d por resultado!\n", sumatoria);
+            system("pause");
+
+            break;
+
+        case 5:
+//Hacer una función tipo float que calcule el promedio de una matriz de números enteros.
+            cargaMatriz(filas, columnas, matrizA);
+            system("cls");
+            printf("\nMatriz cargada correctamente!\n");
+            system("pause");
+            system("cls");
+            printf("\nLa matriz cargada fue:\n");
+            muestraMatriz(filas, columnas, matrizA);
+            system("pause");
+            system("cls");
+            printf("\nSe procedera a realizar su promedio!\n");
+            system("pause");
+            system("cls");
+            promedio = promedioMatriz(filas, columnas, matrizA);
+            printf("\nEl promedio de los valores cargados en la matriz es: %.2f.\n", promedio);
+            system("pause");
+
+            break;
+
+        case 6:
+//Hacer una función que determine si un elemento se encuentra
+//dentro de una matriz de números enteros. La función recibe la matriz y el dato a buscar.
+            cargaMatriz(filas, columnas, matrizA[filas][columnas]);
+            system("cls");
+            printf("\nLa matriz fue cargada correctamente!\n");
+            muestraMatriz(filas, columnas, matrizA[filas][columnas]);
+            system("pause");
+            system("cls");
+            printf("\nIngrese el dato que desea buscar dentro de la matriz:\n");
+            scanf("%d", &dato);
+            system("cls");
+            printf("\nEl dato ingresado fue: %d.\n", dato);
+            printf("\nSe procedera a realizar la busqueda!\n");
+            system("pause");
+            system("cls");
+            flag = buscaEnMatriz(filas, columnas, matrizA[filas][columnas], dato);
+            if(flag==1)
+            {
+                printf("\nEl dato ingresado efectivamente existe dentro de la matriz!\n");
+            }else
+            {
+                printf("\nEl dato ingresado lamentablemente no existe dentro de la matriz...\n");
+            }
+            system("pause");
+
+            break;
+
+        case 7:
+//Hacer una función que cargue un arreglo de palabras (strings). 
+//La función debe retornar cuantas palabras se cargaron.  
+//(puede ser a través del parámetro como puntero)
+
+
+            break;
+//
+//        case 8:
+//
+//
+//            break;
+//
+//        case 9:
+//
+//
+//            break;
+//
+//        case 10:
+//
+//
+//            break;
+//
+//        case 11:
+//
+//
+//            break;
+//
+//        case 12:
+//
+//
+//            break;
+//
+//        case 13:
+//
+//
+//            break;
+//
+//        case 14:
+//
+//
+//            break;
+//
+//        case 15:
+//
+//
+//            break;
+//
+//        case 16:
+//
+//
+//            break;
+
+        case 17:
+
+            printf("\nSaliendo del programa...\n");
+            return 0;
+
+        default:
+
+            printf("\nERROR\n\nEl numero ingresado no corresponde a ninguna de las opciones disponibles.\n");
+            printf("Por favor ingrese una opcion valida.\n");
+
+            break;
+        }
+    }
+
+    return 0;
+}
+
+
+void funcionMenu()
+{
+    system("cls");
+    printf("\nBienvenido a la resolucion del TP n4 : MATRICES.\n");
+    printf("Ingrese el punto a realizar:\n");
+    printf("Puntos 1 al 16.\n");
+    printf("Opcion 17 para salir del sistema.\n");
+}
+
+void cargaMatriz(int filas,int columnas, int matriz[filas][columnas])
+{
+    int i, j, carga;
+
+    for(i=0;i<filas;i++)
+    {
+        for(j=0;j<columnas;j++)
+        {
+            printf("\nIngrese un valor entero a la matriz:\n(rango 1-10)\n");
+            scanf("%d", &carga);
+            if(carga>0 && carga<11)
+            {
+                matriz[i][j]=carga;
+                system("cls");
+            }else
+            {
+                printf("\nEl dato ingresado no es valido.\nPor favor ingrese un dato valido.\n");
+                system("pause");
+                system("cls");
+            }
+        }
+    }
+}
+
+void muestraMatriz(int filas, int columnas, int matriz[filas][columnas])
+{
+    int i, j;
+
+    for(i=0;i<filas;i++)
+    {
+        for(j=0;j<columnas;j++)
+        {
+            printf(" %d |", matriz[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void cargaMatrizRandom(int filas, int columnas, int matriz[filas][columnas])
+{
+    int i, j;
+
+    for(i=0;i<filas;i++)
+    {
+        for(j=0;j<columnas;j++)
+        {
+            matriz[i][j] = rand()%10;
+        }
+    }
+}
+
+int sumaElementosMatriz(int filas, int columnas, int matriz[filas][columnas])
+{
+    int i, j;
+    int suma=0;
+
+    for(i=0;i<filas;i++)
+    {
+        for(j=0;j<columnas;j++)
+            {
+               suma += matriz[i][j];
+            }
+    }
+    return suma;
+}
+
+float promedioMatriz(int filas, int columnas, int matriz[filas][columnas])
+{
+    int i, j;
+    float promedio=0;
+
+    for(i=0;i<filas;i++)
+    {
+        for(j=0;j<columnas;j++)
+        {
+            promedio+=matriz[i][j];
+        }
+    }
+    return (float)promedio/(filas*columnas);
+}
+
+int buscaEnMatriz(int filas, int columnas, int matriz[filas][columnas], int dato)
+{
+    int i, j;
+    int flag = 0;
+
+    for(i=0;i<filas;i++)
+    {
+        for(j=0;j<columnas;j++)
+        {
+            if(dato == matriz[i][j])
+            {
+                flag = 1;
+            }
+        }
+    }
+    return flag;
+}
+
+int cargaMatrizStrings(int filas, int columnas, matriz[filas][columnas])
+{
+    int i;
+    int palabras;
+    char escape = 0;
+    
+    while(i<filas && escape!=27)
+    {
+        printf("\nIngrese la palabra que desea cargar:\n(Maximo 30 caracteres)\n");
+        scanf("%s", ) //strlen chequear medida de palabra.
+        
+    }
+}
